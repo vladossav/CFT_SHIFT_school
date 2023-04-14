@@ -1,4 +1,8 @@
 package ru.savenkov.homework
 
-class Action {
+enum class Action {
+    MULTIPLY,
+    DIVIDE,
+    POW,
+    DEDUCT
 }

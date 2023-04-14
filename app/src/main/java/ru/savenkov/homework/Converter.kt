@@ -1,4 +1,5 @@
 package ru.savenkov.homework
 
-class Converter {
+interface Converter {
+    fun convertInputStringNumberToDouble(input: String): Double
 }
