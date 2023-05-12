@@ -1,4 +1,4 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.presentation.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.savenkov.homework.data.Contact

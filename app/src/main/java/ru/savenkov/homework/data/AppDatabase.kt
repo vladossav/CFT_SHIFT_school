@@ -1,4 +1,4 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.data
 
 import android.content.Context
 import androidx.room.Database
@@ -11,7 +11,7 @@ abstract class AppDatabase: RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: AppDatabase ?= null
+        private var INSTANCE: AppDatabase?= null
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this){

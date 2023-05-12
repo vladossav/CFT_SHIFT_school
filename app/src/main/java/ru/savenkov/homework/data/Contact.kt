@@ -1,4 +1,4 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,4 +10,4 @@ data class Contact(
     val id: Int,
     val name: String,
     val phone: String
-    )
+    ): java.io.Serializable

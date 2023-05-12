@@ -1,10 +1,11 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.savenkov.homework.data.ContactDao
 import ru.savenkov.homework.data.Contact
 
 class MainActivityViewModel(private val db: ContactDao): ViewModel() {

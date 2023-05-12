@@ -1,4 +1,4 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.presentation
 
 import android.Manifest.permission.READ_CONTACTS
 import android.app.Dialog
@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
+import ru.savenkov.homework.R
 import ru.savenkov.homework.data.AppDatabase
 import ru.savenkov.homework.data.Contact
 
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val contactsAdapter = ContactsAdapter {contact ->
-            showChangeContactDialog(contact)
+            ContactDialogFragment.editTypeInstance(contact)
+                .show(supportFragmentManager, ContactDialogFragment.TAG)
         }
         findViewById<RecyclerView>(R.id.recycler_holder)
             .adapter = contactsAdapter
@@ -49,7 +51,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.add_contact_btn).setOnClickListener {
-            showAddContactDialog()
+            ContactDialogFragment.addTypeInstance()
+                .show(supportFragmentManager, ContactDialogFragment.TAG)
         }
 
         viewModel.contactList.observe(this) {
@@ -67,61 +70,6 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
             initContacts()
         }
-    }
-
-    private fun showChangeContactDialog(contact: Contact) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.update_contact_dialog)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        val btnUpdate: Button = dialog.findViewById(R.id.update_btn)
-        val btnDelete: Button = dialog.findViewById(R.id.delete_btn)
-        val btnCancel: Button = dialog.findViewById(R.id.cancel_add_btn)
-        val inputName: EditText = dialog.findViewById(R.id.add_name_data)
-        val inputPhone: EditText = dialog.findViewById(R.id.add_phone_data)
-        inputName.setText(contact.name)
-        inputPhone.setText(contact.phone)
-
-        btnUpdate.setOnClickListener {
-            dialog.cancel()
-            val name = inputName.text.toString()
-            val phone = inputPhone.text.toString()
-            val contact = Contact(contact.id, name, phone)
-            viewModel.updateContact(contact)
-        }
-        btnDelete.setOnClickListener {
-            dialog.cancel()
-            viewModel.deleteContact(contact)
-        }
-        btnCancel.setOnClickListener{
-            dialog.cancel()
-        }
-        dialog.show()
-    }
-
-    private fun showAddContactDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.add_contact_dialog)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        val btnAdd: Button = dialog.findViewById(R.id.add_btn)
-        val btnCancel: Button = dialog.findViewById(R.id.cancel_add_btn)
-        val inputName: EditText = dialog.findViewById(R.id.add_name_data)
-        val inputPhone: EditText = dialog.findViewById(R.id.add_phone_data)
-        btnAdd.setOnClickListener {
-            dialog.cancel()
-            val name = inputName.text.toString()
-            val phone = inputPhone.text.toString()
-            viewModel.insertContact(Contact(0,name, phone))
-        }
-        btnCancel.setOnClickListener{
-            dialog.cancel()
-        }
-        dialog.show()
     }
 
    private fun initContacts() {

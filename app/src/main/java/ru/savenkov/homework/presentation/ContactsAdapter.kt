@@ -1,4 +1,4 @@
-package ru.savenkov.homework
+package ru.savenkov.homework.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import ru.savenkov.homework.R
 import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.presentation.utils.RecyclerDiffUtil
 
 class ContactsAdapter(private val onClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactViewHolder>() {
     private var contactsList: List<Contact> = mutableListOf()
