@@ -1,7 +1,6 @@
 package ru.savenkov.homework
 
 import android.Manifest.permission.READ_CONTACTS
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -15,12 +14,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
+import ru.savenkov.homework.data.AppDatabase
+import ru.savenkov.homework.data.Contact
 
 
-class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
+class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels{
-        MainActivityViewModel.ViewModelFactory(AppDatabase.getInstance(applicationContext).contactDao())
+        viewModelFactory {
+            initializer {
+                MainActivityViewModel(AppDatabase.getInstance(applicationContext).contactDao())
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +38,14 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
             ActivityCompat.requestPermissions(this, arrayOf(READ_CONTACTS), 200)
         }
 
-        val contactsAdapter = ContactsAdapter(this)
+        val contactsAdapter = ContactsAdapter {contact ->
+            showChangeContactDialog(contact)
+        }
         findViewById<RecyclerView>(R.id.recycler_holder)
             .adapter = contactsAdapter
 
         findViewById<Button>(R.id.clear_btn).setOnClickListener {
-            viewModel.clearAllFromDatabase()
+            viewModel.clearAll()
         }
 
         findViewById<Button>(R.id.add_contact_btn).setOnClickListener {
@@ -47,10 +56,6 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
             contactsAdapter.reload(it)
         }
 
-    }
-
-    override fun onClick(id: Int, name: String, phone: String) {
-        showChangeContactDialog(id, name, phone)
     }
 
     override fun onRequestPermissionsResult(
@@ -64,7 +69,7 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
         }
     }
 
-    private fun showChangeContactDialog(id:Int, name: String, phone: String) {
+    private fun showChangeContactDialog(contact: Contact) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -76,18 +81,19 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
         val btnCancel: Button = dialog.findViewById(R.id.cancel_add_btn)
         val inputName: EditText = dialog.findViewById(R.id.add_name_data)
         val inputPhone: EditText = dialog.findViewById(R.id.add_phone_data)
-        inputName.setText(name)
-        inputPhone.setText(phone)
+        inputName.setText(contact.name)
+        inputPhone.setText(contact.phone)
 
         btnUpdate.setOnClickListener {
             dialog.cancel()
             val name = inputName.text.toString()
             val phone = inputPhone.text.toString()
-            viewModel.updateContactById(id,name,phone)
+            val contact = Contact(contact.id, name, phone)
+            viewModel.updateContact(contact)
         }
         btnDelete.setOnClickListener {
             dialog.cancel()
-            viewModel.deleteFromDatabaseById(id)
+            viewModel.deleteContact(contact)
         }
         btnCancel.setOnClickListener{
             dialog.cancel()
@@ -110,7 +116,7 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
             dialog.cancel()
             val name = inputName.text.toString()
             val phone = inputPhone.text.toString()
-            viewModel.insertToDatabase(Contact(name, phone))
+            viewModel.insertContact(Contact(0,name, phone))
         }
         btnCancel.setOnClickListener{
             dialog.cancel()
@@ -118,45 +124,41 @@ class MainActivity : AppCompatActivity(), ContactsAdapter.Listener {
         dialog.show()
     }
 
-   @SuppressLint("Range")
-   fun initContacts() {
+   private fun initContacts() {
        val cur = contentResolver.query(
            ContactsContract.Contacts.CONTENT_URI,
            null, null, null, null
        )
 
-       if (cur!!.count > 0) {
-           while (cur.moveToNext()) {
-               val id: String = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID))
-               val name: String =
-                   cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+       cur.use {
+           if (it!!.count > 0) {
+               while (it.moveToNext()) {
+                   val id: String = it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
+                   val name: String =
+                       it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
 
-
-               if (cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
-                       .toInt() > 0
-               ) {
-                   val pCur = contentResolver.query(
-                       ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                       null,
-                       ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                       arrayOf(id),
-                       null
-                   )
-                   while (pCur!!.moveToNext()) {
-                       val phoneNo =
-                           pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-
-
-                       val contact = Contact(name, phoneNo)
-
-                       viewModel.insertToDatabase(contact)
+                   if (it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                           .toInt() > 0
+                   ) {
+                       val pCur = contentResolver.query(
+                           ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                           null,
+                           ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                           arrayOf(id),
+                           null
+                       )
+                       while (pCur!!.moveToNext()) {
+                           val phoneNo =
+                               pCur.getString(pCur.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                           val contact = Contact(0,name, phoneNo)
+                           viewModel.insertContact(contact)
+                       }
+                       pCur.close()
                    }
-                   pCur.close()
                }
            }
        }
 
-       cur.close()
    }
 
 }

@@ -1,10 +1,11 @@
 package ru.savenkov.homework
 
 import androidx.recyclerview.widget.DiffUtil
+import ru.savenkov.homework.data.Contact
 
 class RecyclerDiffUtil(
-    private val oldList: MutableList<Contact>,
-    private val newList: MutableList<Contact>
+    private val oldList: List<Contact>,
+    private val newList: List<Contact>
 ): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
     override fun getNewListSize(): Int = newList.size
