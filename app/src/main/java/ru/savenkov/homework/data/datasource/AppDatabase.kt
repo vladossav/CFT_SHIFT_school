@@ -1,9 +1,10 @@
-package ru.savenkov.homework.data
+package ru.savenkov.homework.data.datasource
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.savenkov.homework.data.model.Contact
 
 @Database(version = 1, entities = [Contact::class], exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {

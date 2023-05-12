@@ -10,9 +10,18 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.data.model.Contact
+import ru.savenkov.homework.domain.usecase.AddContactUseCase
+import ru.savenkov.homework.domain.usecase.DeleteContactUseCase
+import ru.savenkov.homework.domain.usecase.EditContactUseCase
 
 class ContactDialogFragment: DialogFragment() {
+    private val repository by lazy {
+        (requireActivity().application as App).contactRepository
+    }
+    private val addContactUseCase by lazy { AddContactUseCase(repository) }
+    private val editContactUseCase by lazy { EditContactUseCase(repository)  }
+    private val deleteContactUseCase by lazy {  DeleteContactUseCase(repository) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,24 +43,28 @@ class ContactDialogFragment: DialogFragment() {
             btnAdd.setOnClickListener {
                 val name = inputName.text.toString()
                 val phone = inputPhone.text.toString()
-                //viewModel.insertContact(Contact(0,name, phone))
+                addContactUseCase.execute(Contact(0, name, phone))
+                dismiss()
             }
         }
         if (arguments?.getSerializable(TYPE_KEY) == TYPE.EDIT)  {
             val contact = arguments?.getSerializable(CONTACT_KEY) as Contact
             inputName.setText(contact.name)
             inputPhone.setText(contact.phone)
+
             val btnUpdate: Button = view.findViewById(R.id.update_btn)
-            val btnDelete: Button = view.findViewById(R.id.delete_btn)
             btnUpdate.setOnClickListener {
                 val name = inputName.text.toString()
                 val phone = inputPhone.text.toString()
-                val contact = Contact(contact.id, name, phone)
-                //viewModel.updateContact(contact)
-            }
-            btnDelete.setOnClickListener {
+                val updatedContact = Contact(contact.id, name, phone)
+                editContactUseCase.execute(updatedContact)
                 dismiss()
-                //viewModel.deleteContact(contact)
+            }
+
+            val btnDelete: Button = view.findViewById(R.id.delete_btn)
+            btnDelete.setOnClickListener {
+                deleteContactUseCase.execute(contact)
+                dismiss()
             }
         }
 

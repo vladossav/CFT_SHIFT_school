@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.data.model.Contact
 import ru.savenkov.homework.presentation.utils.RecyclerDiffUtil
 
 class ContactsAdapter(private val onClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactViewHolder>() {

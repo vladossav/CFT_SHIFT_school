@@ -1,8 +1,8 @@
-package ru.savenkov.homework.data
+package ru.savenkov.homework.data.datasource
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.data.model.Contact
 
 
 @Dao

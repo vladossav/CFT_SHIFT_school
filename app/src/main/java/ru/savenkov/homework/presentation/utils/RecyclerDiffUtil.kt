@@ -1,7 +1,7 @@
 package ru.savenkov.homework.presentation.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.data.model.Contact
 
 class RecyclerDiffUtil(
     private val oldList: List<Contact>,

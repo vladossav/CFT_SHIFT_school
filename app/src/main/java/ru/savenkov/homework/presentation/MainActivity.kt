@@ -1,15 +1,10 @@
 package ru.savenkov.homework.presentation
 
 import android.Manifest.permission.READ_CONTACTS
-import android.app.Dialog
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.view.Window
 import android.widget.Button
-import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -18,16 +13,15 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.AppDatabase
-import ru.savenkov.homework.data.Contact
+import ru.savenkov.homework.data.model.Contact
 
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels{
         viewModelFactory {
             initializer {
-                MainActivityViewModel(AppDatabase.getInstance(applicationContext).contactDao())
-            }
+                MainActivityViewModel((application as App))
+               }
         }
     }
 

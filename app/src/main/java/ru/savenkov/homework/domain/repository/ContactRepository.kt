@@ -1,10 +1,12 @@
 package ru.savenkov.homework.domain.repository
 
-import ru.savenkov.homework.data.Contact
+import kotlinx.coroutines.flow.Flow
+import ru.savenkov.homework.data.model.Contact
 
 interface ContactRepository {
-    fun addContact(contact: Contact)
-    fun updateContact(contact: Contact)
-    fun deleteContact(contact: Contact)
-    fun deleteAll()
+    suspend fun addContact(contact: Contact)
+    suspend fun updateContact(contact: Contact)
+    suspend fun deleteContact(contact: Contact)
+    suspend fun deleteAll()
+    suspend fun getAll(): Flow<List<Contact>>
 }
