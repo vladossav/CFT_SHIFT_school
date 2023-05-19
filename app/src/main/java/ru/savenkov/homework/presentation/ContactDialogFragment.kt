@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.model.Contact
-import ru.savenkov.homework.domain.usecase.AddContactUseCase
-import ru.savenkov.homework.domain.usecase.DeleteContactUseCase
-import ru.savenkov.homework.domain.usecase.EditContactUseCase
+import ru.savenkov.homework.shared.contacts.data.model.Contact
+import ru.savenkov.homework.shared.contacts.domain.usecase.AddContactUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.DeleteContactUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.EditContactUseCase
 
 class ContactDialogFragment: DialogFragment() {
     private val repository by lazy {
@@ -22,6 +25,14 @@ class ContactDialogFragment: DialogFragment() {
     private val addContactUseCase by lazy { AddContactUseCase(repository) }
     private val editContactUseCase by lazy { EditContactUseCase(repository)  }
     private val deleteContactUseCase by lazy {  DeleteContactUseCase(repository) }
+    private val viewModel: ContactDialogViewModel by activityViewModels{
+        viewModelFactory {
+            initializer {
+                ContactDialogViewModel(deleteContactUseCase, editContactUseCase,
+                addContactUseCase)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +54,7 @@ class ContactDialogFragment: DialogFragment() {
             btnAdd.setOnClickListener {
                 val name = inputName.text.toString()
                 val phone = inputPhone.text.toString()
-                addContactUseCase.execute(Contact(0, name, phone))
+                viewModel.addContact(Contact(0, name, phone))
                 dismiss()
             }
         }
@@ -57,13 +68,13 @@ class ContactDialogFragment: DialogFragment() {
                 val name = inputName.text.toString()
                 val phone = inputPhone.text.toString()
                 val updatedContact = Contact(contact.id, name, phone)
-                editContactUseCase.execute(updatedContact)
+                viewModel.updateContact(updatedContact)
                 dismiss()
             }
 
             val btnDelete: Button = view.findViewById(R.id.delete_btn)
             btnDelete.setOnClickListener {
-                deleteContactUseCase.execute(contact)
+                viewModel.deleteContact(contact)
                 dismiss()
             }
         }

@@ -1,18 +1,29 @@
 package ru.savenkov.homework.presentation
 
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import ru.savenkov.homework.data.model.Contact
-import ru.savenkov.homework.domain.usecase.AddContactUseCase
-import ru.savenkov.homework.domain.usecase.DeleteAllContactsUseCase
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import ru.savenkov.homework.shared.contacts.data.model.Contact
+import ru.savenkov.homework.shared.contacts.domain.usecase.AddContactUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.DeleteAllContactsUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.GetAllContactsUseCase
 
-class MainActivityViewModel(private val app: App): AndroidViewModel(application = app) {
-    private val deleteAllContactsUseCase = DeleteAllContactsUseCase(app.contactRepository)
-    private val getAllContactsUseCase = DeleteAllContactsUseCase(app.contactRepository)
-    private val addContactUseCase = AddContactUseCase(app.contactRepository)
+class MainActivityViewModel(
+    private val deleteAllContactsUseCase: DeleteAllContactsUseCase,
+    private val getAllContactsUseCase: GetAllContactsUseCase,
+    private val addContactUseCase: AddContactUseCase
+): ViewModel() {
 
-    var contactList = (app.database).contactDao().allContacts().asLiveData()
+    var contactList = getAllContactsUseCase.execute().asLiveData()
 
-    fun clearAll() = deleteAllContactsUseCase.execute()
-    fun insertContact(contact: Contact) = addContactUseCase.execute(contact)
+
+    fun clearAll() = viewModelScope.launch {
+        deleteAllContactsUseCase.execute()
+    }
+
+    fun insertContact(contact: Contact) = viewModelScope.launch {
+        addContactUseCase.execute(contact)
+    }
 }

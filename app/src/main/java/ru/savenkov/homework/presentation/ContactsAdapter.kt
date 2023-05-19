@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.model.Contact
-import ru.savenkov.homework.presentation.utils.RecyclerDiffUtil
+import ru.savenkov.homework.shared.contacts.data.model.Contact
+import ru.savenkov.homework.utils.RecyclerDiffUtil
 
 class ContactsAdapter(private val onClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactViewHolder>() {
     private var contactsList: List<Contact> = mutableListOf()
@@ -25,7 +25,12 @@ class ContactsAdapter(private val onClick: (Contact) -> Unit) : RecyclerView.Ada
     override fun getItemCount(): Int = contactsList.size
 
     fun reload(newList: List<Contact>) {
-        val difResult = DiffUtil.calculateDiff(RecyclerDiffUtil(contactsList, newList))
+        val difResult = DiffUtil.calculateDiff(
+            RecyclerDiffUtil(
+                contactsList,
+                newList
+            )
+        )
         contactsList = newList
         difResult.dispatchUpdatesTo(this)
     }

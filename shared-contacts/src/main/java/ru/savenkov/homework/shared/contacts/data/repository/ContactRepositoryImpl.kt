@@ -1,8 +1,8 @@
-package ru.savenkov.homework.data.repository
+package ru.savenkov.homework.shared.contacts.data.repository
 
-import ru.savenkov.homework.data.model.Contact
-import ru.savenkov.homework.data.datasource.ContactDao
-import ru.savenkov.homework.domain.repository.ContactRepository
+import ru.savenkov.homework.shared.contacts.data.model.Contact
+import ru.savenkov.homework.shared.contacts.data.datasource.ContactDao
+import ru.savenkov.homework.shared.contacts.domain.repository.ContactRepository
 
 class ContactRepositoryImpl(private val db: ContactDao): ContactRepository {
 
@@ -13,5 +13,5 @@ class ContactRepositoryImpl(private val db: ContactDao): ContactRepository {
     override suspend fun deleteContact(contact: Contact) = db.delete(contact)
 
     override suspend fun deleteAll() = db.deleteAll()
-    override suspend fun getAll(): kotlinx.coroutines.flow.Flow<List<Contact>> = db.allContacts()
+    override fun getAll(): kotlinx.coroutines.flow.Flow<List<Contact>> = db.allContacts()
 }

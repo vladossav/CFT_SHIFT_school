@@ -13,17 +13,31 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.model.Contact
+import ru.savenkov.homework.shared.contacts.data.model.Contact
+import ru.savenkov.homework.shared.contacts.domain.usecase.AddContactUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.DeleteAllContactsUseCase
+import ru.savenkov.homework.shared.contacts.domain.usecase.GetAllContactsUseCase
 
 
 class MainActivity : AppCompatActivity() {
+    private val deleteAllContactsUseCase by lazy {
+        DeleteAllContactsUseCase((applicationContext as App).contactRepository)
+    }
+    private val getAllContactsUseCase by lazy {
+        GetAllContactsUseCase((applicationContext as App).contactRepository)
+    }
+    private val addContactUseCase by lazy {
+        AddContactUseCase((applicationContext as App).contactRepository)
+    }
+
     private val viewModel: MainActivityViewModel by viewModels{
         viewModelFactory {
             initializer {
-                MainActivityViewModel((application as App))
+                MainActivityViewModel(deleteAllContactsUseCase, getAllContactsUseCase, addContactUseCase)
                }
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

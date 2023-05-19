@@ -1,8 +1,8 @@
 package ru.savenkov.homework.presentation
 
 import android.app.Application
-import ru.savenkov.homework.data.datasource.AppDatabase
-import ru.savenkov.homework.data.repository.ContactRepositoryImpl
+import ru.savenkov.homework.shared.contacts.data.datasource.AppDatabase
+import ru.savenkov.homework.shared.contacts.data.repository.ContactRepositoryImpl
 
 class App: Application() {
     val database by lazy {

@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "homework"
 include ':app'
+include ':shared-contacts'
+include ':feature-contacts'
+include ':utils'

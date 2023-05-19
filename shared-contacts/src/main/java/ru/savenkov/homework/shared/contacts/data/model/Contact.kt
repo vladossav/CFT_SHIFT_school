@@ -1,4 +1,4 @@
-package ru.savenkov.homework.data.model
+package ru.savenkov.homework.shared.contacts.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
