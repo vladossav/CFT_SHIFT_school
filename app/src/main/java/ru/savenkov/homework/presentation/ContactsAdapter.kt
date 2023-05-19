@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ru.savenkov.homework.R
+import ru.savenkov.homework.feature.contacts.R
 import ru.savenkov.homework.shared.contacts.data.model.Contact
 import ru.savenkov.homework.utils.RecyclerDiffUtil
 
