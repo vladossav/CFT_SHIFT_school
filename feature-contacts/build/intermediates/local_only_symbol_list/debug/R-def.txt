@@ -1,0 +1,31 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+id add_btn
+id add_contact_btn
+id add_name
+id add_name_data
+id add_phone
+id add_phone_data
+id cancel_add_btn
+id clear_btn
+id delete_btn
+id name
+id name_data
+id phone
+id phone_data
+id recycler_holder
+id update_btn
+layout add_contact_dialog
+layout fragment_main
+layout rv_item
+layout update_contact_dialog
+string app_name
+string hello_blank_fragment
+style Theme.Homework
