@@ -4,6 +4,9 @@
 /.idea
 .DS_Store
 /build
+/shared-contacts
+/utils
+/feature-contacts
 /captures
 .externalNativeBuild
 .cxx
