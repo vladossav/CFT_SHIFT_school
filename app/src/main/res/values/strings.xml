@@ -3,4 +3,6 @@
     <string name="title">ШИФТ Курсы</string>
     <string name="accept_button">Принять</string>
     <string name="cancel_button">Отклонить</string>
+    <string name="enter_text">Enter text</string>
+    <string name="enter_button">Enter</string>
 </resources>
