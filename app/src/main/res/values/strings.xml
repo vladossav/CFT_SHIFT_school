@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">homework</string>
     <string name="title">ШИФТ Курсы</string>
     <string name="accept_button">Принять</string>
     <string name="cancel_button">Отклонить</string>

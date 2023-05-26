@@ -5,10 +5,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import ru.savenkov.homework.data.ListItem
+import ru.savenkov.homework.util.RecyclerDiffUtil
 
 class StudentAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<ListItem> = emptyList()
+    set(value) {
+        val difResult = DiffUtil.calculateDiff(RecyclerDiffUtil(field, value))
+        field = value
+        difResult.dispatchUpdatesTo(this)
+    }
 
     private companion object {
         const val STUDENT_VIEW_TYPE = 0
