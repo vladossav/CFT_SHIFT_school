@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">homework</string>
+    <string name="upload_button">Upload</string>
 </resources>
