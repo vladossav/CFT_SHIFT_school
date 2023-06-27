@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/loansFragment">
+
+    <fragment
+        android:id="@+id/loansFragment"
+        android:name="ru.savenkov.homework.screens.loans.LoansFragment"
+        android:label="fragment_loan_list"
+        tools:layout="@layout/fragment_loans" >
+        <action
+            android:id="@+id/action_loansFragment_to_loanFragment"
+            app:destination="@id/loanFragment" />
+        <action
+            android:id="@+id/action_loansFragment_to_createLoanFragment"
+            app:destination="@id/createLoanFragment" />
+        <action
+            android:id="@+id/action_loansFragment_to_instructionFragment"
+            app:destination="@id/instructionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanFragment"
+        android:name="ru.savenkov.homework.screens.loan.LoanFragment"
+        android:label="fragment_loan"
+        tools:layout="@layout/fragment_loan" />
+    <fragment
+        android:id="@+id/createLoanFragment"
+        android:name="ru.savenkov.homework.screens.createLoan.CreateLoanFragment"
+        android:label="fragment_create_loan"
+        tools:layout="@layout/fragment_create_loan" />
+    <fragment
+        android:id="@+id/instructionFragment"
+        android:name="ru.savenkov.homework.screens.instruction.InstructionFragment"
+        android:label="fragment_instruction"
+        tools:layout="@layout/fragment_instruction" />
+</navigation>
