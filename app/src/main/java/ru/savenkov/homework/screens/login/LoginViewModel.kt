@@ -34,6 +34,7 @@ class LoginViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
+            _uiState.postValue(Result.Loading)
             val auth = Auth(username, password)
             val result = repository.login(auth)
             _uiState.postValue(result)

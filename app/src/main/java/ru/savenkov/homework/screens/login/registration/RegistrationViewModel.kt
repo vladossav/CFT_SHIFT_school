@@ -37,6 +37,7 @@ class RegistrationViewModel @Inject constructor(
             _uiState.postValue(Result.Error(res.getString(R.string.reg_error_passwords)))
             return@launch
         }
+        _uiState.postValue(Result.Loading)
         val auth = Auth(username, password1)
         val result = repository.register(auth)
         _uiState.postValue(result)

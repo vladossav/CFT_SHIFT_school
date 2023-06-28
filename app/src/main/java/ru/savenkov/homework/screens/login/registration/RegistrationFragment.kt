@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,8 +39,10 @@ class RegistrationFragment : Fragment() {
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Error) view!!.showSnackbar(state.message)
             if (state is Result.Success) findNavController().popBackStack()
+            binding.regForm.isVisible = state !is Result.Loading
+            binding.progressBar.isVisible = state is Result.Loading
+            if (state is Result.Error) view!!.showSnackbar(state.message)
         }
 
         return binding.root

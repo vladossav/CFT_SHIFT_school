@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.savenkov.homework.utils.Result
@@ -19,8 +20,7 @@ class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by activityViewModels()
     private var _binding: FragmentLoginBinding? = null
-    private val binding
-    get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +43,11 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Error) view!!.showSnackbar(state.message)
             if (state is Result.Success)
                 findNavController().navigate(R.id.action_loginFragment_to_main_graph)
+            binding.loginForm.isVisible = state !is Result.Loading
+            binding.progressBar.isVisible = state is Result.Loading
+            if (state is Result.Error) view!!.showSnackbar(state.message)
         }
 
         return binding.root

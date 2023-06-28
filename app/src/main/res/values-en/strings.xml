@@ -41,8 +41,8 @@
     <string name="loan_create_success_accept_button">Accept</string>
 
     <string name="instruction">Welcome to the Loans app!
-\nThe main screen of the application displays a list of loans issued. To update the list, swipe from top to bottom. To display detailed information about the loan, click on the loan list item. \n\n To apply for a new loan, click the \"+\" icon in the upper right corner. A screen will open with the loan terms and the form. In the fields of the form, enter information about your first name, last name, phone number, as well as the loan amount not exceeding the amount specified in the condition. After clicking the \"Create loan\" button, the application will be sent to the bank.
-\n\Track the change in the status of the application. After changing the loan status to \"Approved\", make a visit to the bank to sign the contract and receive the loan to your account.</string>
+\n\nThe main screen of the application displays a list of loans issued. To update the list, swipe from top to bottom. To display detailed information about the loan, click on the loan list item. \n\n To apply for a new loan, click the \"+\" icon in the upper right corner. A screen will open with the loan terms and the form. In the fields of the form, enter information about your first name, last name, phone number, as well as the loan amount not exceeding the amount specified in the condition. After clicking the \"Create loan\" button, the application will be sent to the bank.
+\n\nTrack the change in the status of the application. After changing the loan status to \"Approved\", make a visit to the bank to sign the contract and receive the loan to your account.</string>
     <string name="instruction_title">User\'s Guide</string>
 
     <string name="error_incorrect_input">Incorrect input! Try again</string>
