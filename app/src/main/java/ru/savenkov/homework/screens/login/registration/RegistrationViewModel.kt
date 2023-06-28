@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.LoanRepository
+import ru.savenkov.homework.repository.LoanRepository
 import ru.savenkov.homework.data.model.Auth
 import ru.savenkov.homework.data.model.UserRole
 import ru.savenkov.homework.utils.Result

@@ -1,6 +1,6 @@
 package ru.savenkov.homework.data.repository
 
-import ru.savenkov.homework.data.LoanRepository
+import ru.savenkov.homework.repository.LoanRepository
 import ru.savenkov.homework.data.datasource.LocalSettingsDataSource
 import ru.savenkov.homework.data.datasource.RemoteDataSource
 import ru.savenkov.homework.data.model.*
@@ -20,6 +20,7 @@ class LoanRepositoryImpl @Inject constructor(
 
     override suspend fun getLoanCondition(): Result<LoanCondition> =
         remoteDataSource.getLoanCondition()
+
 
     override suspend fun createLoan(loan: LoanRequest): Result<Loan> =
         remoteDataSource.createLoan(loan)

@@ -29,10 +29,21 @@
         android:id="@+id/createLoanFragment"
         android:name="ru.savenkov.homework.screens.createLoan.CreateLoanFragment"
         android:label="fragment_create_loan"
-        tools:layout="@layout/fragment_create_loan" />
+        tools:layout="@layout/fragment_create_loan" >
+        <action
+            android:id="@+id/action_createLoanFragment_to_successFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/createLoanFragment"
+            app:destination="@id/successFragment" />
+    </fragment>
     <fragment
         android:id="@+id/instructionFragment"
         android:name="ru.savenkov.homework.screens.instruction.InstructionFragment"
         android:label="fragment_instruction"
         tools:layout="@layout/fragment_instruction" />
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="ru.savenkov.homework.screens.createLoan.CreateSuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_create_success" />
 </navigation>

@@ -11,7 +11,7 @@ import ru.savenkov.homework.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
 import ru.savenkov.homework.R
 import ru.savenkov.homework.databinding.FragmentLoginBinding
-import ru.savenkov.homework.utils.snackbar
+import ru.savenkov.homework.utils.showSnackbar
 
 
 @AndroidEntryPoint
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Error) view!!.snackbar(state.message)
+            if (state is Result.Error) view!!.showSnackbar(state.message)
             if (state is Result.Success)
                 findNavController().navigate(R.id.action_loginFragment_to_main_graph)
         }

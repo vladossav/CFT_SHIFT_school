@@ -1,4 +1,4 @@
-package ru.savenkov.homework.data
+package ru.savenkov.homework.repository
 
 import ru.savenkov.homework.data.model.*
 import ru.savenkov.homework.utils.Result

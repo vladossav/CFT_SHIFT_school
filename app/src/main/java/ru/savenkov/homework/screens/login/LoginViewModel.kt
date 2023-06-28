@@ -1,6 +1,5 @@
 package ru.savenkov.homework.screens.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import ru.savenkov.homework.utils.Result
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.savenkov.homework.data.LoanRepository
+import ru.savenkov.homework.repository.LoanRepository
 import ru.savenkov.homework.data.model.Auth
 import javax.inject.Inject
 

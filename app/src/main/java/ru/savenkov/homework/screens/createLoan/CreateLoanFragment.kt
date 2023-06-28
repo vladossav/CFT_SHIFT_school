@@ -1,21 +1,18 @@
 package ru.savenkov.homework.screens.createLoan
 
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import ru.savenkov.homework.utils.Result
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.savenkov.homework.R
-import ru.savenkov.homework.data.model.LoanRequest
 import ru.savenkov.homework.databinding.FragmentCreateLoanBinding
-import ru.savenkov.homework.databinding.FragmentLoanBinding
-import ru.savenkov.homework.utils.snackbar
-import kotlin.math.withSign
+import ru.savenkov.homework.utils.showSnackbar
 
 @AndroidEntryPoint
 class CreateLoanFragment : Fragment() {
@@ -23,8 +20,7 @@ class CreateLoanFragment : Fragment() {
     private val viewModel: CreateLoanViewModel by viewModels()
 
     private var _binding: FragmentCreateLoanBinding? = null
-    private val binding
-        get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,36 +28,37 @@ class CreateLoanFragment : Fragment() {
     ): View {
         _binding = FragmentCreateLoanBinding.inflate(inflater, container, false)
 
-        if (savedInstanceState != null) {
-            binding.lastnameInput.setText(viewModel.lastName)
-            binding.firstnameInput.setText(viewModel.firstName)
-            binding.phoneInput.setText(viewModel.phone)
-            binding.amountInput.setText(viewModel.amount)
+        if (savedInstanceState != null) setSavedInputData()
+
+        viewModel.conditionState.observe(viewLifecycleOwner) { state ->
+            binding.conditionCard.isVisible = state !is Result.Loading
+            binding.createLoanForm.isVisible = state !is Result.Loading
+            binding.progressBar.isVisible = state is Result.Loading
+
+            if (state is Result.Error) view!!.showSnackbar(state.message)
+            if (state is Result.Success) binding.conditionText.text =
+                resources.getString(
+                    R.string.loan_create_condition,
+                    state.data.maxAmount.toString(), state.data.percent, state.data.period
+                )
+        }
+
+        viewModel.createdLoanState.observe(viewLifecycleOwner) {state ->
+            if (state is Result.Success)
+                findNavController().navigate(R.id.action_createLoanFragment_to_successFragment)
+            if (state is Result.Error) view!!.showSnackbar(state.message)
         }
 
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        viewModel.uiState.observe(viewLifecycleOwner) {state ->
-
-            if (state is Result.Success) {
-                binding.conditionText.text =
-                    resources.getString(
-                        R.string.loan_create_condition,
-                        state.data.maxAmount.toString(), state.data.percent, state.data.period
-                    )
-            }
-            if (state is Result.Error) view!!.snackbar(state.message)
-        }
-
         binding.createLoanButton.setOnClickListener {
             createLoan()
         }
 
-
         return binding.root
     }
+
 
     override fun onPause() {
         super.onPause()
@@ -78,6 +75,14 @@ class CreateLoanFragment : Fragment() {
             return
         }
         viewModel.createLoan()
+
+    }
+
+    private fun setSavedInputData() {
+        binding.lastnameInput.setText(viewModel.lastName)
+        binding.firstnameInput.setText(viewModel.firstName)
+        binding.phoneInput.setText(viewModel.phone)
+        binding.amountInput.setText(viewModel.amount)
     }
 
     private fun saveInputState() {

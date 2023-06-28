@@ -11,6 +11,9 @@
     <string name="login_button_label">Войти</string>
     <string name="login_reg_button_label">Зарегистрироваться</string>
 
+    <string name="loans_empty_list">Список займов пуст!\n Для оформления нового нажмите на \"+\"</string>
+    <string name="loan_amount">%1$d руб.</string>
+
     <string name="loan_details_firstname">Имя:</string>
     <string name="loan_details_lastname">Фамилия:</string>
     <string name="loan_details_phone">Номер телефона:</string>
@@ -19,6 +22,7 @@
     <string name="loan_details_amount">Сумма (руб):</string>
     <string name="loan_details_status">Статус:</string>
     <string name="loan_details_title">Займ от %1$s</string>
+    <string name="loan_details_loading_title">Займ</string>
     <string name="loan_status_approved">Одобрен</string>
     <string name="loan_status_registered">Зарегистрирован</string>
     <string name="loan_status_rejected">Отклонён</string>
@@ -31,21 +35,26 @@
     <string name="loan_create_amount_hint">Сумма займа</string>
     <string name="loan_create_condition">Вам доступен займ в размере до %1$s рублей под %2$.2f процентов на
     %3$d дней. Для оформления займа заполните поля ниже и нажмите кнопку \"Оформить займ\"</string>
-    <string name="loan_create_get_loan_info">После оформления заявки на займ банк проведет анализ Вашей кредитной истории. Если займ примет статус "Одобрен", Вам нужно будет подойти с паспортом в отделение банка для подписания договора. После подписания договора займ поступит на Ваш счет.</string>
+    <string name="loan_create_get_loan_info">После оформления заявки на займ банк проведет анализ Вашей кредитной истории. Когда займ примет статус \"Одобрен\", Вам нужно будет подойти с паспортом в отделение банка для подписания договора. После подписания договора займ поступит на Ваш счет.</string>
+    <string name="loan_create_success_label">Займ успешно оформлен!</string>
+    <string name="loan_create_success_info">Отслеживайте изменение статуса заявки. После изменения статуса займа на \"Одобрен\" совершите визит в банк для подписания договора и получения займа на Ваш счет.</string>
+    <string name="loan_create_success_accept_button">Принять</string>
 
-    <string name="instruction">    Приветствуем вас в приложении займов!
-\n\nНа главном экране приложения отображается список оформленных займов. Для отображения детальной информации о займе нажмите на элемент списка займов. \n\nДля оформления нового займа нажмите значок \"+\" в правом верхнем углу. Откроется экран с условиями займа и формой. В поля формы введите данные о своем имени, фамилии, номере телефона, а также сумме займа, не превышающей указанной в условии. После нажатия кнопки \"Оформить займ\" заявка поступит в банк.
-\n\nОтслеживайте изменение статуса заявки. После изменения статуса займа на \"Одобрен\" совершите визит в банк для подписания договора и получения займа на счет.  </string>
+    <string name="instruction">    Приветствуем Вас в приложении займов!
+\n\nНа главном экране приложения отображается список оформленных займов. Для обновления списка сделайте свайп сверху вниз. Для отображения детальной информации о займе нажмите на элемент списка займов. \n\nДля оформления нового займа нажмите значок \"+\" в правом верхнем углу. Откроется экран с условиями займа и формой. В поля формы введите данные о своем имени, фамилии, номере телефона, а также сумме займа, не превышающей указанной в условии. После нажатия кнопки \"Оформить займ\" заявка поступит в банк.
+\n\nОтслеживайте изменение статуса заявки. После изменения статуса займа на \"Одобрен\" совершите визит в банк для подписания договора и получения займа на Ваш счет.</string>
     <string name="instruction_title">Руководство пользователя</string>
 
     <string name="error_incorrect_input">Некорректный ввод! Попробуйте снова</string>
     <string name="error_incorrect_input_login_or_password">Введён неправильный логин или пароль</string>
     <string name="error_check_internet_connection">Проверьте подключение к интернету</string>
+    <string name="error_request">Произошла ошибка запроса! Попробуйте позже</string>
 
     <string name="error_input_amount">Введена некорректная сумма займа!</string>
     <string name="error_input_field_is_blank">Содержимое поля пусто!</string>
 
     <string name="input_name_available_symbols">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя</string>
+
 
 </resources>

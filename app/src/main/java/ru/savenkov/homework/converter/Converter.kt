@@ -2,6 +2,9 @@ package ru.savenkov.homework.converter
 
 import android.content.res.Resources
 import ru.savenkov.homework.R
+import ru.savenkov.homework.data.model.Loan
+import ru.savenkov.homework.data.model.LoanCondition
+import ru.savenkov.homework.data.model.LoanRequest
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +23,4 @@ object Converter {
         "REGISTERED" -> resources.getString(R.string.loan_status_registered)
         else -> throw java.lang.IllegalStateException()
     }
-
-
 }

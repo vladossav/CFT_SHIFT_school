@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -15,7 +16,7 @@ import ru.savenkov.homework.converter.Converter
 import ru.savenkov.homework.data.model.Loan
 import ru.savenkov.homework.databinding.FragmentLoanBinding
 import ru.savenkov.homework.utils.Result
-import ru.savenkov.homework.utils.snackbar
+import ru.savenkov.homework.utils.showSnackbar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,7 +47,9 @@ class LoanFragment : Fragment() {
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Error) view!!.snackbar(state.message)
+            binding.progressBar.isVisible = state is Result.Loading
+            binding.screenInfo.isVisible = state !is Result.Loading
+            if (state is Result.Error) view!!.showSnackbar(state.message)
             if (state is Result.Success) setLoanDetails(state.data)
         }
 

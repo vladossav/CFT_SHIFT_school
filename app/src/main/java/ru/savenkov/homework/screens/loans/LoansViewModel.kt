@@ -7,8 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.savenkov.homework.data.LoanRepository
-import ru.savenkov.homework.data.model.Auth
+import ru.savenkov.homework.repository.LoanRepository
 import ru.savenkov.homework.data.model.Loan
 import ru.savenkov.homework.utils.Result
 import javax.inject.Inject
@@ -24,6 +23,7 @@ class LoansViewModel @Inject constructor(
 
     fun getLoans() {
         viewModelScope.launch(Dispatchers.IO) {
+            _loansState.postValue(Result.Loading)
             val loansList = repository.getLoans()
             _loansState.postValue(loansList)
         }
@@ -33,12 +33,6 @@ class LoansViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repository.logout()
         }
-    }
-
-    fun wasFirstLogin(): Boolean = repository.wasFirstLogin()
-
-    fun setWasFirstLogin() {
-        repository.setWasFirstLogin()
     }
 
     fun checkWasFirstLogin(): Boolean {

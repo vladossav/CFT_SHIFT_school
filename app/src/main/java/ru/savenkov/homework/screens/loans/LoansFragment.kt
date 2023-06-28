@@ -1,12 +1,12 @@
 package ru.savenkov.homework.screens.loans
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -16,7 +16,7 @@ import ru.savenkov.homework.R
 import ru.savenkov.homework.databinding.FragmentLoansBinding
 import ru.savenkov.homework.screens.loan.LoanFragment
 import ru.savenkov.homework.utils.Result
-import ru.savenkov.homework.utils.snackbar
+import ru.savenkov.homework.utils.showSnackbar
 
 
 @AndroidEntryPoint
@@ -49,8 +49,14 @@ class LoansFragment : Fragment() {
         }
 
         viewModel.loansState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Success) adapter.loanList = state.data
-            if (state is Result.Error) view!!.snackbar(state.message)
+            binding.progressBar.isVisible = state is Result.Loading
+            if (state is Result.Success) {
+                binding.loansEmptyListLabel.isVisible = state.data.isEmpty()
+                adapter.loanList = state.data
+            }
+            if (state is Result.Error) {
+                view!!.showSnackbar(state.message)
+            }
         }
         
         binding.loansRecycler.adapter = adapter

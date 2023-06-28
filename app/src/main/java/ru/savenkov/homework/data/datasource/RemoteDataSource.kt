@@ -23,13 +23,12 @@ class RemoteDataSource @Inject constructor(
         return if (response.isSuccessful && response.body() != null) {
             accessToken = response.body()!!
             Result.Success(accessToken)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
                 404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
     }
 
     suspend fun getLoanList(token: String): Result<List<Loan>> {
@@ -42,13 +41,12 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
                 404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
 
     }
 
@@ -61,13 +59,12 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
-                404 -> Result.Error("Введён неправильный логин или пароль")
+                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
 
     }
 
@@ -80,13 +77,12 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
-                404 -> Result.Error("Введён неправильный логин или пароль")
+                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
     }
 
     suspend fun createLoan(loan: LoanRequest): Result<Loan> {
@@ -98,13 +94,13 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
-                404 -> Result.Error("Введён неправильный логин или пароль")
+                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
+
     }
 
     suspend fun register(auth: Auth): Result<UserRole> {
@@ -116,13 +112,12 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else if (response.errorBody() != null) {
+        } else {
             when(response.code()) {
-                404 -> Result.Error("Введён неправильный логин или пароль")
+                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
                 else -> Result.Error("${response.code()} ERRPR")
             }
         }
-        else Result.Error("ОШИБКА ОИБОК")
     }
 
 }

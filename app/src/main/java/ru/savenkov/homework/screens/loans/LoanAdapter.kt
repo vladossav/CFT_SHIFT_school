@@ -38,7 +38,8 @@ class LoanViewHolder(parent: ViewGroup, private val onClick: (Long) -> Unit): Re
             Converter.toLocalDateTime(item.date)
         itemView.findViewById<TextView>(R.id.loan_status).text =
             Converter.toLocalLanguage(itemView.resources, item.state)
-        itemView.findViewById<TextView>(R.id.loan_amount).text = item.amount.toString()
+        itemView.findViewById<TextView>(R.id.loan_amount).text =
+            itemView.resources.getString(R.string.loan_amount,  item.amount)
 
         itemView.setOnClickListener {
             onClick.invoke(item.id)

@@ -5,15 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.savenkov.homework.R
-import ru.savenkov.homework.databinding.FragmentLoginBinding
 import ru.savenkov.homework.databinding.FragmentRegistrationBinding
 import ru.savenkov.homework.utils.Result
-import ru.savenkov.homework.utils.snackbar
+import ru.savenkov.homework.utils.showSnackbar
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -41,7 +38,7 @@ class RegistrationFragment : Fragment() {
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) {state ->
-            if (state is Result.Error) view!!.snackbar(state.message)
+            if (state is Result.Error) view!!.showSnackbar(state.message)
             if (state is Result.Success) findNavController().popBackStack()
         }
 
