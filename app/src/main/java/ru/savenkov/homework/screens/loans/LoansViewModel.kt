@@ -17,8 +17,8 @@ class LoansViewModel @Inject constructor(
     private val repository: LoanRepository
     ): ViewModel() {
 
-    private val _loansState: MutableLiveData<Result<List<Loan>>> = MutableLiveData()
-    val loansState: LiveData<Result<List<Loan>>>
+    private val _loansState: MutableLiveData<Result<List<Loan>>> = MutableLiveData(Result.Initial)
+    val loansState
     get() = _loansState
 
     fun getLoans() {

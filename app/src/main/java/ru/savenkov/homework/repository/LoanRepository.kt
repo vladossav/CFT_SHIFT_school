@@ -12,6 +12,8 @@ interface LoanRepository {
     suspend fun login(auth: Auth): Result<String>
     suspend fun register(auth: Auth): Result<UserRole>
     suspend fun logout()
+    fun setNewLanguage(language: String)
+    fun getCurrentLanguage(): String
     fun wasFirstLogin(): Boolean
     fun setWasFirstLogin()
 }

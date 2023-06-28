@@ -45,6 +45,12 @@ class LoanRepositoryImpl @Inject constructor(
         localSettingsDataSource.setLogoutStatus()
     }
 
+    override fun setNewLanguage(language: String) {
+        localSettingsDataSource.setCurrentLanguage(language)
+    }
+
+    override fun getCurrentLanguage(): String = localSettingsDataSource.getCurrentLanguage()
+
     override suspend fun register(auth: Auth): Result<UserRole> =
         remoteDataSource.register(auth)
 

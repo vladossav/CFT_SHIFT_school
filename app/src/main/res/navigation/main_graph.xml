@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loansFragment_to_instructionFragment"
             app:destination="@id/instructionFragment" />
+        <action
+            android:id="@+id/action_loansFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loanFragment"
@@ -46,4 +49,8 @@
         android:name="ru.savenkov.homework.screens.createLoan.CreateSuccessFragment"
         android:label="fragment_success"
         tools:layout="@layout/fragment_create_success" />
+    <dialog
+        android:id="@+id/settingsFragment"
+        android:name="ru.savenkov.homework.screens.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

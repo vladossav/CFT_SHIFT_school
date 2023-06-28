@@ -47,8 +47,6 @@
 
     <string name="error_incorrect_input">Некорректный ввод! Попробуйте снова</string>
     <string name="error_incorrect_input_login_or_password">Введён неправильный логин или пароль</string>
-    <string name="error_server">Сервер не отвечает! Попробуйте позже</string>
-    <string name="error_user_already_exists">Такой пользователь уже существует!</string>
     <string name="error_check_internet_connection">Проверьте подключение к интернету</string>
     <string name="error_request">Произошла ошибка запроса! Попробуйте позже</string>
 
@@ -57,11 +55,10 @@
 
     <string name="input_name_available_symbols">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя</string>
-
-    <string name="settings_ru" translatable="false">Русский</string>
-    <string name="settings_en" translatable="false">English</string>
     <string name="settings_title">Настройки</string>
     <string name="settings_language">Язык приложения</string>
+    <string name="error_user_already_exists">Такой пользователь уже существует!</string>
+    <string name="error_server">Сервер не отвечает! Попробуйте позже</string>
 
 
 </resources>

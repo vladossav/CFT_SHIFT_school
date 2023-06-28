@@ -23,12 +23,7 @@ class RemoteDataSource @Inject constructor(
         return if (response.isSuccessful && response.body() != null) {
             accessToken = response.body()!!
             Result.Success(accessToken)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
     suspend fun getLoanList(token: String): Result<List<Loan>> {
@@ -41,13 +36,7 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
-
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
     suspend fun getLoanById(id: Long): Result<Loan> {
@@ -59,13 +48,7 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
-
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
     suspend fun getLoanCondition(): Result<LoanCondition> {
@@ -77,12 +60,7 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
     suspend fun createLoan(loan: LoanRequest): Result<Loan> {
@@ -94,13 +72,7 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
-
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
     suspend fun register(auth: Auth): Result<UserRole> {
@@ -112,12 +84,15 @@ class RemoteDataSource @Inject constructor(
 
         return if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
-        } else {
-            when(response.code()) {
-                404 -> Result.Error(res.getString(R.string.error_incorrect_input_login_or_password))
-                else -> Result.Error("${response.code()} ERRPR")
-            }
-        }
+        } else Result.Error(getErrorByResponseCode(response.code()))
     }
 
+    private fun getErrorByResponseCode(code: Int): String {
+        if (code in 500..600) return res.getString(R.string.error_server)
+        return when(code) {
+            404 -> res.getString(R.string.error_incorrect_input_login_or_password)
+            400 -> res.getString(R.string.error_user_already_exists)
+            else -> res.getString(R.string.error_check_internet_connection)
+        }
+    }
 }

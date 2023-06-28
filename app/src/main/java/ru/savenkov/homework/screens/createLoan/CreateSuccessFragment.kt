@@ -11,7 +11,6 @@ import ru.savenkov.homework.databinding.FragmentCreateSuccessBinding
 
 class CreateSuccessFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,6 +23,5 @@ class CreateSuccessFragment : Fragment() {
 
         return binding.root
     }
-
 
 }

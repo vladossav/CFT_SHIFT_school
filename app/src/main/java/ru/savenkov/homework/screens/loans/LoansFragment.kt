@@ -68,6 +68,10 @@ class LoansFragment : Fragment() {
             findNavController().navigate(R.id.action_loansFragment_to_createLoanFragment)
         }
 
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loansFragment_to_settingsFragment)
+        }
+
         binding.logoutButton.setOnClickListener {
             logoutAndNavigateToSignScreen()
         }

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Loans</string>
+
+    <string name="reg_label">Registration</string>
+    <string name="reg_name">Username</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_repeat_password">Repeat password</string>
+    <string name="reg_error_passwords">Input passwords not equals!</string>
+
+    <string name="login_label">Authorization</string>
+    <string name="login_button_label">Login</string>
+    <string name="login_reg_button_label">Register</string>
+
+    <string name="loans_empty_list">List of loans is empty!\n For creating new loan press button \"+\"</string>
+    <string name="loan_amount">%1$d RUB</string>
+
+    <string name="loan_details_firstname">Name:</string>
+    <string name="loan_details_lastname">Surname:</string>
+    <string name="loan_details_phone">Phone number:</string>
+    <string name="loan_details_percent">Percent (%):</string>
+    <string name="loan_details_period">Period (days):</string>
+    <string name="loan_details_amount">Amount (RUB):</string>
+    <string name="loan_details_status">Status:</string>
+    <string name="loan_details_title">Loan from %1$s</string>
+    <string name="loan_details_loading_title">Loan</string>
+    <string name="loan_status_approved">Approved</string>
+    <string name="loan_status_registered">Registered</string>
+    <string name="loan_status_rejected">Rejected</string>
+
+    <string name="loan_create_title">Creating loan</string>
+    <string name="loan_create_button">Create loan</string>
+    <string name="loan_create_firstname_hint">Name</string>
+    <string name="loan_create_lastname_hint">Surname</string>
+    <string name="loan_create_phone_hint">Phone number</string>
+    <string name="loan_create_amount_hint">Amount of loan</string>
+    <string name="loan_create_condition">You can borrow up to %1$s rubles under %2$.2f percent on
+    %3$d days. To apply for a loan, fill in the fields below and click  \"Create loan\"</string>
+    <string name="loan_create_get_loan_info">After applying for a loan, the bank will analyze your credit history. When the loan takes the status \"Approved\", you will need to come to the bank branch with your passport to sign the contract. After signing the contract, the loan will be credited to your account.</string>
+    <string name="loan_create_success_label">The loan has been successfully issued!</string>
+    <string name="loan_create_success_info">Track changes in the status of the application. After changing the loan status to \"Approved\", make a visit to the bank to sign the contract and receive the loan to your account.</string>
+    <string name="loan_create_success_accept_button">Accept</string>
+
+    <string name="instruction">Welcome to the Loans app!
+\nThe main screen of the application displays a list of loans issued. To update the list, swipe from top to bottom. To display detailed information about the loan, click on the loan list item. \n\n To apply for a new loan, click the \"+\" icon in the upper right corner. A screen will open with the loan terms and the form. In the fields of the form, enter information about your first name, last name, phone number, as well as the loan amount not exceeding the amount specified in the condition. After clicking the \"Create loan\" button, the application will be sent to the bank.
+\n\Track the change in the status of the application. After changing the loan status to \"Approved\", make a visit to the bank to sign the contract and receive the loan to your account.</string>
+    <string name="instruction_title">User\'s Guide</string>
+
+    <string name="error_incorrect_input">Incorrect input! Try again</string>
+    <string name="error_incorrect_input_login_or_password">Incorrect username or password entered</string>
+    <string name="error_check_internet_connection">Check your internet connection</string>
+    <string name="error_request">A server request error has occurred! Try again later</string>
+
+    <string name="error_input_amount">An incorrect loan amount has been entered!</string>
+    <string name="error_input_field_is_blank">The contents of the field are empty!</string>
+
+    <string name="input_name_available_symbols">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="error_user_already_exists">Such user already exists!</string>
+    <string name="error_server">"The server is not responding! try later "</string>
+
+</resources>

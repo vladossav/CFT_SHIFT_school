@@ -8,8 +8,17 @@ class LocalSettingsDataSource @Inject constructor(
     private val sharedPrefs: SharedPreferences
 ) {
     private val IS_AUTHORIZED = "IS_AUTHORIZED"
+    private val CURRENT_LANGUAGE_KEY = "CURRENT_LANGUAGE_KEY"
     private val AUTHORIZED_TOKEN = "AUTHORIZED_TOKEN"
     private val WAS_FIRST_LOGIN_KEY = "WAS_FIRST_LOGIN_KEY"
+
+    fun setCurrentLanguage(language: String) {
+        sharedPrefs.edit()
+            .putString(CURRENT_LANGUAGE_KEY, language)
+            .apply()
+    }
+
+    fun getCurrentLanguage() = sharedPrefs.getString(CURRENT_LANGUAGE_KEY, "ru")!!
 
     fun setAuthorizedTokenAndStatus(token: String) {
         val isAuthorized = true
